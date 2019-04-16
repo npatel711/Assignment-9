@@ -18,10 +18,17 @@ UPDATE actor SET first_name = 'GROUCHO' WHERE first_name='HARPO' AND last_name='
 SHOW CREATE TABLE address; 
 
 SELECT first_name, last_name, address FROM staff INNER JOIN address ON staff.address_id = address.address_id;
-SELECT first_name, last_name, SUM(amount) as 'Total Amount' FROM staff INNER JOIN payment ON staff.staff_id = payment.staff_id AND payment_date LIKE '2005-08%' GROUP BY first_name, last_name;
-SELECT title, COUNT(actor_id) as 'Actor Count' FROM film_actor INNER JOIN film ON film_actor.film_id = film.film_id GROUP BY title;
-SELECT title, COUNT(title) as 'Copies Available' FROM film INNER JOIN inventory ON film.film_id = inventory.film_id WHERE title = 'Hunchback Impossible';
-SELECT first_name, last_name, SUM(amount) as 'Total Paid by Each Customer' FROM payment INNER JOIN customer ON payment.customer_id = customer.customer_id GROUP BY first_name, last_name ORDER BY last_name; 
+SELECT first_name, last_name, SUM(amount) as 'Total Amount' FROM staff 
+INNER JOIN payment ON staff.staff_id = payment.staff_id AND payment_date LIKE '2005-08%' GROUP BY first_name, last_name;
+
+SELECT title, COUNT(actor_id) as 'Actor Count' FROM film_actor 
+INNER JOIN film ON film_actor.film_id = film.film_id GROUP BY title;
+
+SELECT title, COUNT(title) as 'Copies Available' FROM film 
+INNER JOIN inventory ON film.film_id = inventory.film_id WHERE title = 'Hunchback Impossible';
+
+SELECT first_name, last_name, SUM(amount) as 'Total Paid by Each Customer' FROM payment 
+INNER JOIN customer ON payment.customer_id = customer.customer_id GROUP BY first_name, last_name ORDER BY last_name; 
 
 SELECT title
 FROM film
